@@ -1,20 +1,27 @@
 // BOTÓN ABRIR INVITACIÓN
 
-document
-.getElementById("btnEntrar")
-.addEventListener("click", () => {
+const musica = document.getElementById("musica");
+const boton = document.getElementById("btnEntrar");
 
-    document
-    .getElementById("invitacion")
-    .style.display = "block";
+boton.addEventListener("click", () => {
 
-    musica.play();
+    document.querySelector(".hero").classList.add("ocultar");
 
-    document
-    .querySelector(".bienvenida")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
+    setTimeout(() => {
+
+        document.querySelector(".hero").style.display = "none";
+
+        document.getElementById("invitacion").style.display = "block";
+
+        musica.play().catch(() => {});
+
+        document.querySelector(".bienvenida").scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+    }, 800);
 
 });
 
@@ -98,6 +105,30 @@ function actualizarContador() {
 
 actualizarContador();
 
+setInterval(
+    actualizarContador,
+    1000
+);
+btnSalir.addEventListener("click", () => {
+
+    musica.pause();
+
+    musica.currentTime = 0;
+
+    document.body.innerHTML = `
+        <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:2rem;
+            text-align:center;
+        ">
+            💙 Gracias por visitar la invitación 💙
+        </div>
+    `;
+
+});
 setInterval(
     actualizarContador,
     1000
